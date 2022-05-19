@@ -1,0 +1,450 @@
+{
+    "py/object": "entity.game.Game",
+    "name": "拳皇wing-隆",
+    "image": "",
+    "type": "动作游戏",
+    "description": "游戏地址：https://1990.games/p/832\n选择角色隆，出招为简易模式",
+    "actions": [
+        {
+            "py/object": "entity.action.Action",
+            "name": "大号旋风腿",
+            "level": "1",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "0",
+                        "located": "上"
+                    },
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "0",
+                        "located": "上"
+                    }
+                ],
+                "angles": []
+            },
+            "keys": "i"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "气功波-左",
+            "level": "2",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "13",
+                        "located": "右"
+                    }
+                ],
+                "angles": []
+            },
+            "keys": "a+j"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "旋风腿-左",
+            "level": "20",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "23",
+                        "organ2": "24",
+                        "organ3": "23",
+                        "organ4": "25",
+                        "angle1": "120",
+                        "angle2": "175"
+                    },
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "12",
+                        "organ2": "11",
+                        "organ3": "12",
+                        "organ4": "14",
+                        "angle1": "120",
+                        "angle2": "175"
+                    }
+                ]
+            },
+            "keys": "a+k"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "旋风腿-右",
+            "level": "21",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "24",
+                        "organ2": "23",
+                        "organ3": "24",
+                        "organ4": "26",
+                        "angle1": "120",
+                        "angle2": "175"
+                    },
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "12",
+                        "organ2": "11",
+                        "organ3": "12",
+                        "organ4": "14",
+                        "angle1": "120",
+                        "angle2": "175"
+                    }
+                ]
+            },
+            "keys": "d+k"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "曝气",
+            "level": "22",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "0",
+                        "located": "左"
+                    },
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "0",
+                        "located": "右"
+                    }
+                ],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "13",
+                        "organ2": "15",
+                        "organ3": "14",
+                        "organ4": "16",
+                        "angle1": "60",
+                        "angle2": "140"
+                    }
+                ]
+            },
+            "keys": "o"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "格挡-左",
+            "level": "90",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "12",
+                        "located": "上"
+                    }
+                ],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "14",
+                        "organ2": "12",
+                        "organ3": "14",
+                        "organ4": "16",
+                        "angle1": "30",
+                        "angle2": "90"
+                    }
+                ]
+            },
+            "keys": "a"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "格挡-右",
+            "level": "91",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "11",
+                        "located": "上"
+                    }
+                ],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "13",
+                        "organ2": "15",
+                        "organ3": "13",
+                        "organ4": "11",
+                        "angle1": "20",
+                        "angle2": "90"
+                    }
+                ]
+            },
+            "keys": "d"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "翻滚-左",
+            "level": "32",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "28",
+                        "located": "上"
+                    },
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "26",
+                        "located": "下"
+                    }
+                ],
+                "angles": []
+            },
+            "keys": "d+l"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "翻滚-右",
+            "level": "33",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "27",
+                        "located": "上"
+                    },
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "25",
+                        "located": "下"
+                    }
+                ],
+                "angles": []
+            },
+            "keys": "a+l"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "气功波-右",
+            "level": "4",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "15",
+                        "standard": "14",
+                        "located": "左"
+                    }
+                ],
+                "angles": []
+            },
+            "keys": "d+j"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "升龙拳-右",
+            "level": "40",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "右手举起超过鼻子",
+                        "judge_point": "15",
+                        "standard": "0",
+                        "located": "上"
+                    }
+                ],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "13",
+                        "organ2": "15",
+                        "organ3": "13",
+                        "organ4": "11",
+                        "angle1": "150",
+                        "angle2": "180"
+                    }
+                ]
+            },
+            "keys": "s+a+j"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "升龙拳-左",
+            "level": "41",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [
+                    {
+                        "py/object": "entity.position.Position",
+                        "description": "",
+                        "judge_point": "16",
+                        "standard": "0",
+                        "located": "上"
+                    }
+                ],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "14",
+                        "organ2": "16",
+                        "organ3": "14",
+                        "organ4": "12",
+                        "angle1": "150",
+                        "angle2": "180"
+                    }
+                ]
+            },
+            "keys": "s+d+j"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "腿-右",
+            "level": "86",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "23",
+                        "organ2": "24",
+                        "organ3": "23",
+                        "organ4": "25",
+                        "angle1": "120",
+                        "angle2": "175"
+                    }
+                ]
+            },
+            "keys": "k"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "腿-左",
+            "level": "87",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "24",
+                        "organ2": "23",
+                        "organ3": "24",
+                        "organ4": "26",
+                        "angle1": "120",
+                        "angle2": "175"
+                    }
+                ]
+            },
+            "keys": "k"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "拳-左",
+            "level": "88",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "12",
+                        "organ2": "11",
+                        "organ3": "12",
+                        "organ4": "14",
+                        "angle1": "150",
+                        "angle2": "180"
+                    }
+                ]
+            },
+            "keys": "j"
+        },
+        {
+            "py/object": "entity.action.Action",
+            "name": "拳-右",
+            "level": "89",
+            "type": "",
+            "judge": {
+                "py/object": "entity.judge.Judge",
+                "positions": [],
+                "angles": [
+                    {
+                        "py/object": "entity.angle.Angle",
+                        "description": "",
+                        "organ1": "11",
+                        "organ2": "12",
+                        "organ3": "11",
+                        "organ4": "13",
+                        "angle1": "150",
+                        "angle2": "180"
+                    }
+                ]
+            },
+            "keys": "j"
+        }
+    ]
+}
