@@ -1,4 +1,5 @@
 import math
+import threading
 import time
 
 import mediapipe as mp
@@ -6,8 +7,8 @@ import cv2
 import numpy as np
 import pyautogui
 
-# 判断动作角度是否符合要求
 
+# 判断动作角度是否符合要求
 
 def judgeAngles(angle, result_post):
     post1 = result_post.landmark[int(angle.organ1)]
@@ -17,9 +18,9 @@ def judgeAngles(angle, result_post):
     min_angle = int(angle.angle1)
     max_angle = int(angle.angle2)
     result_angle = get_angle(post1, post2, post3, post4)
-    # print("角度：")
-    # print("最小："+str(min_angle))
-    # print("最大：" + str(max_angle))
+    # print("角度:")
+    # print("最小:"+str(min_angle))
+    # print("最大:" + str(max_angle))
     # print(result_angle)
     if min_angle <= result_angle <= max_angle:
         return True
@@ -27,9 +28,10 @@ def judgeAngles(angle, result_post):
         return False
 
 
+
+
 # 判断动作关键位置是否符合要求
 def judgePosition(position, result_post):
-
     standard_post = result_post.landmark[int(position.standard)]
     if standard_post.visibility <= 0.1:
         return False
@@ -89,74 +91,107 @@ def get_angle(angle1, angle2, angle3, angle4):
     return included_angle
 
 
+lock = threading.Lock()
+result_post = None
+game = None
+input_lock = False
+close = False
+
 class PlayService:
+    def __init__(self):
+        self.mpPose = mp.solutions.pose
+        self.draw = mp.solutions.drawing_utils
+        self.pose = self.mpPose.Pose(static_image_mode=False,
+                                     model_complexity=1,
+                                     smooth_landmarks=True,
+                                     enable_segmentation=True,
+                                     smooth_segmentation=True,
+                                     min_detection_confidence=0.5,
+                                     min_tracking_confidence=0.5, )
+        self.judge_action = False
+        self.actions = None
+
+    def inputKey(self):
+        global input_lock
+        while True:
+            if close:
+                break
+            if input_lock:
+                input_lock = False
+                if result_post is not None:
+                    game.actions.sort(key=lambda x: x.level)
+                    for action in game.actions:
+                        judge_action = True
+                        angles = action.judge.angles
+                        for angle in angles:
+                            angle_result = judgeAngles(angle, result_post)
+                            if angle_result is False:
+                                judge_action = False
+                                break
+                        positions = action.judge.positions
+                        for position in positions:
+                            position_result = judgePosition(position, result_post)
+                            if position_result is False:
+                                judge_action = False
+                                break
+                        input_keys = action.keys.split("+")
+                        if judge_action:
+                            for key in input_keys:
+                                if action.keys == "a" or action.keys == "d" or action.keys == "left" or action.keys == "right":
+                                    pyautogui.keyDown(key)
+                                    time.sleep(0.1)
+                                    pyautogui.keyUp(key)
+                                else:
+                                    pyautogui.hotkey(key)
+                time.sleep(0.1)
 
     def readGame(self):
         return
         # 最核心的方法，用于读取动作检测动作是否符合要求，并执行对应的操作
 
-    def playGame(self, game):
+    def playGame(self, new_game):
         cap = cv2.VideoCapture(0)
         play = PlayService()
+        pTime = 0
+        t = threading.Thread(target=self.inputKey)
+        t.start()
+        global game
+        global result_post
+        global input_lock
+        game = new_game
         while cap.isOpened():
             ret, frame = cap.read()
             read_result = play.readImage(ret, frame)
+            input_lock = True
             result_image = read_result["image"]
-            result_post = read_result["pose"]
-            if result_post is not None and result_image is not None:
-                game.actions.sort(key=lambda x: x.level)
-                for action in game.actions:
-                    judge_action = True
-                    angles = action.judge.angles
-                    for angle in angles:
-                        angle_result = judgeAngles(angle, result_post)
-                        if angle_result is False:
-                            judge_action = False
-                            break
-                    positions = action.judge.positions
-                    for position in positions:
-                        position_result = judgePosition(position, result_post)
-                        if position_result is False:
-                            judge_action = False
-                            break
-                    input_keys = action.keys.split("+")
-                    if judge_action:
-
-                        for key in input_keys:
-                            if action.keys == "a" or action.keys == "d" or action.keys == "left" or action.keys == "right":
-                                pyautogui.keyDown(key)
-                                time.sleep(0.15)
-                                pyautogui.keyUp(key)
-                            else:
-                                pyautogui.hotkey(key)
-                            # print(key)
-                            # print("----")
-
-                cv2.imshow("action", result_image)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+            if read_result["pose"] is not None:
+                result_post = read_result["pose"]
+            cTime = time.time()
+            fps = 1 / (cTime - pTime)
+            pTime = cTime
+            show_result_image = result_image.copy()
+            cv2.putText(show_result_image, 'fps:' + str(int(fps)), (100, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 255), 3)
+            cv2.imshow("action", show_result_image)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                global close
+                close = True
+                break
 
     # 读取对应的图片，返回对应数组 （只有动作数组 和 图片）
     def readImage(self, ret, frame):
         if ret:
-            pose = mp.solutions.pose
-            draw = mp.solutions.drawing_utils
-            with pose.Pose(
-                    min_detection_confidence=0.5,
-                    min_tracking_confidence=0.5,
-            ) as result_pose:
-                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                cv2.resize(image, (640, 480))
-                image.flags.writeable = False
-                results = result_pose.process(image)
-                image.flags.writeable = True
-                if results.pose_landmarks:
-                    # 这个还需要乘以对应的宽高
-                    draw.draw_landmarks(image, results.pose_landmarks, pose.POSE_CONNECTIONS)
-                    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-                    image = np.fliplr(image)
-                    return {"pose": results.pose_landmarks, "image": image}
-                return {"pose": results.pose_landmarks, "image": image}
+            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            image.flags.writeable = False
+            start = time.time()
+            results = self.pose.process(image)
+
+            # image.flags.writeable = True
+            if results.pose_landmarks:
+                # 这个还需要乘以对应的宽高
+                self.draw.draw_landmarks(image, results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            image = np.fliplr(image)
+            return {"pose": results.pose_landmarks, "image": image}
 
 
 # 新的方案，让用户进行关键点的设置。
@@ -182,4 +217,3 @@ if __name__ == '__main__':
     #     result_image = read_result["image"]
     #     result_post = read_result["pose"]
     #     play.playGame(game, result_post)
-

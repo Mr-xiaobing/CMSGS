@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QDialog, QPushButton, QWidget, QLabel, QScrollArea
 
 from gui.AddGameUi import AddGameUi
 from service.PlayService import PlayService
+from service.PlayShootingGameService import PlayShootingGameService
 
 
 class LocalActionLibraryUi(QDialog):
@@ -50,6 +51,10 @@ class LocalActionLibraryUi(QDialog):
         edit_button.move(0, 270)
         edit_button.clicked.connect(lambda: self.edit_game(game))
 
+    def shooting(self):
+        shootingGame = PlayShootingGameService()
+        shootingGame.play()
+
     def edit_game(self, game):
         add_game_ui = AddGameUi(game)
         add_game_ui.show()
@@ -80,13 +85,13 @@ class LocalActionLibraryUi(QDialog):
         all_action_button.move(120, 180)
         all_action_button.setMinimumSize(120, 50)
 
+        shooting_action_button = QPushButton(self)
+        shooting_action_button.setText("射击模式")
+        shooting_action_button.move(250, 180)
+        shooting_action_button.setMinimumSize(120, 50)
+        shooting_action_button.clicked.connect(lambda: self.shooting())
         pk_action_button = QPushButton(self)
-        pk_action_button.setText("格斗游戏")
-        pk_action_button.move(250, 180)
-        pk_action_button.setMinimumSize(120, 50)
-
-        pk_action_button = QPushButton(self)
-        pk_action_button.setText("模式")
+        pk_action_button.setText("暂定")
         pk_action_button.move(380, 180)
         pk_action_button.setMinimumSize(120, 50)
 
@@ -104,7 +109,7 @@ class LocalActionLibraryUi(QDialog):
         scroll_area = QScrollArea(self)
         scroll_area.setWidget(actions)
         scroll_area.move(120, 250)
-        scroll_area.setMinimumSize(1320,700)
+        scroll_area.setMinimumSize(1320, 700)
         prefix_url = "./data/"
         files = os.listdir(prefix_url)
         index = 0
