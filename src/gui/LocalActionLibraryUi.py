@@ -5,6 +5,7 @@ from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import QDialog, QPushButton, QWidget, QLabel, QScrollArea
 
 from gui.AddGameUi import AddGameUi
+from service.ControlVideoPlay import ControlVideoPlay
 from service.PlayService import PlayService
 from service.PlayShootingGameService import PlayShootingGameService
 
@@ -55,6 +56,10 @@ class LocalActionLibraryUi(QDialog):
         shootingGame = PlayShootingGameService()
         shootingGame.play()
 
+    def controlVideo(self):
+        control = ControlVideoPlay()
+        control.play()
+
     def edit_game(self, game):
         add_game_ui = AddGameUi(game)
         add_game_ui.show()
@@ -90,10 +95,12 @@ class LocalActionLibraryUi(QDialog):
         shooting_action_button.move(250, 180)
         shooting_action_button.setMinimumSize(120, 50)
         shooting_action_button.clicked.connect(lambda: self.shooting())
-        pk_action_button = QPushButton(self)
-        pk_action_button.setText("暂定")
-        pk_action_button.move(380, 180)
-        pk_action_button.setMinimumSize(120, 50)
+
+        control_video_button = QPushButton(self)
+        control_video_button.setText("观影模式")
+        control_video_button.move(380, 180)
+        control_video_button.setMinimumSize(120, 50)
+        control_video_button.clicked.connect(lambda: self.controlVideo())
 
         pk_action_button = QPushButton(self)
         pk_action_button.setText("其他")
