@@ -2,7 +2,15 @@
 
 # 									低成本体感游戏模拟器
 
-> 一个可以让人使用的动作来操作电脑的软件。可以实现，模拟体感游戏，手势控制等功能。
+> 一个可以让人使用动作来操作电脑的软件。可以实现，模拟体感游戏，手势控制等功能。
+
+#### 效果演示：
+
+[体感拳皇](https://www.bilibili.com/video/BV1zZ4y18771)
+
+[射击游戏](https://www.bilibili.com/video/BV1ir4y1x7sQ/?spm_id_from=333.788.recommend_more_video.3)
+
+[观影模式](https://www.bilibili.com/video/BV16t4y1h7ih/?spm_id_from=333.788.recommend_more_video.12)
 
 #### 开发进度：
 
