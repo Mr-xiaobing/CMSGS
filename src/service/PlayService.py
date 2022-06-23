@@ -29,7 +29,7 @@ def judgeAngles(angle, result_post) -> bool:
     # print("最小:"+str(min_angle))
     # print("最大:" + str(max_angle))
     # print(result_angle)
-    return True if (min_angle <= result_angle <= max_angle) else False
+    return bool(min_angle <= result_angle <= max_angle)
 
 
 def judgePosition(position, result_post) -> bool:

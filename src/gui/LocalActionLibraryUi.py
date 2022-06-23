@@ -51,19 +51,23 @@ class LocalActionLibraryUi(QDialog):
         edit_button.move(0, 270)
         edit_button.clicked.connect(lambda: self.edit_game(game))
 
-    def shooting(self):
+    @staticmethod
+    def shooting():
         shootingGame = PlayShootingGameService()
         shootingGame.play()
 
-    def controlVideo(self):
+    @staticmethod
+    def controlVideo():
         control = ControlVideoPlay()
         control.play()
 
-    def edit_game(self, game):
+    @staticmethod
+    def edit_game(game):
         add_game_ui = AddGameUi(game)
         add_game_ui.show()
 
-    def play_local_game(self, game):
+    @staticmethod
+    def play_local_game(game):
         play = PlayService()
         play.playGame(game)
 
@@ -122,11 +126,11 @@ class LocalActionLibraryUi(QDialog):
         index_y = -1
         for game_str in files:
             if index % 6 == 0:
-                index_y = index_y + 1
+                index_y += 1
                 index = 0
             with open(prefix_url + game_str, encoding="utf-8") as game_file:
                 # dict_game =
                 s = game_file.read()
                 game = jsonpickle.decode(s)
                 self.action_ui(actions, game, index, index_y)
-                index = index + 1
+                index += 1

@@ -50,7 +50,7 @@ class ControlVideoPlay:
         self.isControl = True
         self.count = 50
 
-    def readImage(self, ret, frame) -> None|dict:
+    def readImage(self, ret, frame) -> None | dict:
         """
         返回关键点 和 图像
 
@@ -72,7 +72,8 @@ class ControlVideoPlay:
             return {"hands": results, "image": image}
         return None
 
-    def stopAndPalyVideo(self, position):
+    @staticmethod
+    def stopAndPalyVideo(position):
         """
         暂停/播放
 
@@ -145,7 +146,8 @@ class ControlVideoPlay:
                 return True
         return False
 
-    def nextVideo(self, position):
+    @staticmethod
+    def nextVideo(position):
         """
         下一个视频
 
@@ -201,7 +203,8 @@ class ControlVideoPlay:
                 return True
         return False
 
-    def lastVideo(self, position):
+    @staticmethod
+    def lastVideo(position):
         """
         上一个视频
 
@@ -254,7 +257,8 @@ class ControlVideoPlay:
                 return True
         return False
 
-    def speedUp(self, position):
+    @staticmethod
+    def speedUp(position):
         """
         快进
 
@@ -310,7 +314,8 @@ class ControlVideoPlay:
                 return True
         return
 
-    def speedDown(self, position) -> None | bool:
+    @staticmethod
+    def speedDown(position) -> None | bool:
         """
         快退
 
@@ -363,7 +368,8 @@ class ControlVideoPlay:
                 return True
         return None
 
-    def mute(self, position):
+    @staticmethod
+    def mute(position):
         """
         静音/音量
 
@@ -404,7 +410,8 @@ class ControlVideoPlay:
                 return True
         return False
 
-    def praise(self, position):
+    @staticmethod
+    def praise(position):
         """
         点赞
 
@@ -455,7 +462,8 @@ class ControlVideoPlay:
                 return True
         return
 
-    def threeEven(self, position) -> bool|None:
+    @staticmethod
+    def threeEven(position) -> bool | None:
         """
         一键三连
 
@@ -525,7 +533,8 @@ class ControlVideoPlay:
                     return True
         return None
 
-    def FullScreen(self, position):
+    @staticmethod
+    def FullScreen(position):
         """
         全屏
 
@@ -589,19 +598,20 @@ class ControlVideoPlay:
             right_wrist = position["right_position"][0]
 
             if (left_wrist[1] - right_wrist[1]) > 0.1 and self.isControl:
-                self.count = self.count - 1
+                self.count -= 1
                 if self.count < 0:
                     self.isControl = False
                     print("取消控制")
                     time.sleep(3)
             elif (left_wrist[1] - right_wrist[1]) > 0.1 and self.isControl is False:
-                self.count = self.count + 1
+                self.count += 1
                 if self.count > 100:
                     self.isControl = True
                     print("允许控制")
                     time.sleep(3)
 
-    def findPosition(self, results) -> dict:
+    @staticmethod
+    def findPosition(results) -> dict:
         left_list = []
         right_list = []
         index = 0
