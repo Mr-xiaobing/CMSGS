@@ -1,11 +1,11 @@
 import math
 import sys
 import time
-
 import cv2
 import mediapipe as mp
 import numpy as np
 import pyautogui
+from typing import Callable
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QGuiApplication
 
@@ -73,7 +73,7 @@ class ControlVideoPlay:
         return None
 
     @staticmethod
-    def stopAndPalyVideo(position):
+    def stopAndPalyVideo(position) -> bool:
         """
         暂停/播放
 
@@ -147,7 +147,7 @@ class ControlVideoPlay:
         return False
 
     @staticmethod
-    def nextVideo(position):
+    def nextVideo(position) -> bool:
         """
         下一个视频
 
@@ -204,7 +204,7 @@ class ControlVideoPlay:
         return False
 
     @staticmethod
-    def lastVideo(position):
+    def lastVideo(position) -> bool:
         """
         上一个视频
 
@@ -258,7 +258,7 @@ class ControlVideoPlay:
         return False
 
     @staticmethod
-    def speedUp(position):
+    def speedUp(position) -> bool:
         """
         快进
 
@@ -312,10 +312,10 @@ class ControlVideoPlay:
                 pyautogui.hotkey("right")
                 time.sleep(0.7)
                 return True
-        return
+        return False
 
     @staticmethod
-    def speedDown(position) -> None | bool:
+    def speedDown(position) -> bool:
         """
         快退
 
@@ -366,10 +366,10 @@ class ControlVideoPlay:
                 pyautogui.hotkey("left")
                 time.sleep(0.7)
                 return True
-        return None
+        return False
 
     @staticmethod
-    def mute(position):
+    def mute(position) -> bool:
         """
         静音/音量
 
@@ -411,7 +411,7 @@ class ControlVideoPlay:
         return False
 
     @staticmethod
-    def praise(position):
+    def praise(position) -> bool:
         """
         点赞
 
@@ -460,10 +460,10 @@ class ControlVideoPlay:
                 pyautogui.hotkey("q")
                 time.sleep(2)
                 return True
-        return
+        return False
 
     @staticmethod
-    def threeEven(position) -> bool | None:
+    def threeEven(position) -> bool:
         """
         一键三连
 
@@ -531,10 +531,10 @@ class ControlVideoPlay:
                     time.sleep(3)
                     pyautogui.keyUp("q")
                     return True
-        return None
+        return False
 
     @staticmethod
-    def FullScreen(position):
+    def FullScreen(position) -> bool:
         """
         全屏
 
@@ -542,7 +542,7 @@ class ControlVideoPlay:
         :return:
         """
         if position["right_position"]:
-            right_thumb_cmc = position["right_position"][1]
+            # right_thumb_cmc = position["right_position"][1]
             right_thumb_mcp = position["right_position"][2]
             right_finger_pip6 = position["right_position"][6]
             right_finger_pip10 = position["right_position"][10]
@@ -588,27 +588,27 @@ class ControlVideoPlay:
         """
         if position["left_position"] and position["right_position"]:
 
-            right_thumb_tip = position["right_position"][4]
-            right_finger_tip8 = position["right_position"][8]
-            right_finger_tip12 = position["right_position"][12]
-            right_finger_tip16 = position["right_position"][16]
-            right_finger_tip20 = position["right_position"][20]
+            # right_thumb_tip = position["right_position"][4]
+            # right_finger_tip8 = position["right_position"][8]
+            # right_finger_tip12 = position["right_position"][12]
+            # right_finger_tip16 = position["right_position"][16]
+            # right_finger_tip20 = position["right_position"][20]
 
             left_wrist = position["left_position"][0]
             right_wrist = position["right_position"][0]
 
-            if (left_wrist[1] - right_wrist[1]) > 0.1 and self.isControl:
-                self.count -= 1
-                if self.count < 0:
-                    self.isControl = False
-                    print("取消控制")
-                    time.sleep(3)
-            elif (left_wrist[1] - right_wrist[1]) > 0.1 and self.isControl is False:
-                self.count += 1
-                if self.count > 100:
-                    self.isControl = True
-                    print("允许控制")
-                    time.sleep(3)
+            if (left_wrist[1] - right_wrist[1]) > 0.1:
+                if self.isControl:
+                    self.count -= 1
+                    if self.count < 0:
+                        self.isControl = False
+                        print("取消控制")
+                        time.sleep(3)
+                else:
+                    if self.count > 100:
+                        self.isControl = True
+                        print("允许控制")
+                        time.sleep(3)
 
     @staticmethod
     def findPosition(results) -> dict:
@@ -656,23 +656,20 @@ class ControlVideoPlay:
             # self.setControl(position_list)
             # 切换鼠标控制
             if self.isControl:
-                result = self.nextVideo(position_list)
-                if result is not True:
-                    result = self.lastVideo(position_list)
-                if result is not True:
-                    result = self.stopAndPalyVideo(position_list)
-                if result is not True:
-                    result = self.threeEven(position_list)
-                if result is not True:
-                    result = self.speedUp(position_list)
-                if result is not True:
-                    result = self.speedDown(position_list)
-                if result is not True:
-                    result = self.praise(position_list)
-                if result is not True:
-                    result = self.mute(position_list)
-                if result is not True:
-                    result = self.FullScreen(position_list)
+                fun_list: tuple[Callable, ...] = (
+                    self.nextVideo,
+                    self.lastVideo,
+                    self.stopAndPalyVideo,
+                    self.threeEven,
+                    self.speedUp,
+                    self.speedDown,
+                    self.praise,
+                    self.mute,
+                    self.FullScreen,
+                )
+                for fun in fun_list:
+                    if fun(position_list):  # 函数成功执行返回True，然后不执行后面的
+                        break
 
             # todo 判断需要执行哪个手势
             cTime = time.time()
