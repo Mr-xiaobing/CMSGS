@@ -18,7 +18,7 @@
                         "description": "",
                         "judge_point": "15",
                         "standard": "16",
-                        "located": "上"
+                        "located": "上",
                     }
                 ],
                 "angles": [
@@ -30,7 +30,7 @@
                         "organ3": "14",
                         "organ4": "16",
                         "angle1": "70",
-                        "angle2": "100"
+                        "angle2": "100",
                     },
                     {
                         "py/object": "entity.angle.Angle",
@@ -40,11 +40,11 @@
                         "organ3": "13",
                         "organ4": "14",
                         "angle1": "70",
-                        "angle2": "100"
-                    }
-                ]
+                        "angle2": "100",
+                    },
+                ],
             },
-            "keys": "i"
+            "keys": "i",
         },
         {
             "py/object": "entity.action.Action",
@@ -59,33 +59,33 @@
                         "description": "",
                         "judge_point": "16",
                         "standard": "0",
-                        "located": "右"
+                        "located": "右",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "15",
                         "standard": "0",
-                        "located": "左"
+                        "located": "左",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "16",
                         "standard": "15",
-                        "located": "右"
+                        "located": "右",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "16|15",
                         "standard": "0",
-                        "located": "下"
-                    }
+                        "located": "下",
+                    },
                 ],
-                "angles": []
+                "angles": [],
             },
-            "keys": "o"
+            "keys": "o",
         },
         {
             "py/object": "entity.action.Action",
@@ -104,7 +104,7 @@
                         "organ3": "14",
                         "organ4": "16",
                         "angle1": "30",
-                        "angle2": "90"
+                        "angle2": "90",
                     },
                     {
                         "py/object": "entity.angle.Angle",
@@ -114,11 +114,11 @@
                         "organ3": "13",
                         "organ4": "15",
                         "angle1": "30",
-                        "angle2": "90"
-                    }
-                ]
+                        "angle2": "90",
+                    },
+                ],
             },
-            "keys": "a+k"
+            "keys": "a+k",
         },
         {
             "py/object": "entity.action.Action",
@@ -137,7 +137,7 @@
                         "organ3": "14",
                         "organ4": "16",
                         "angle1": "30",
-                        "angle2": "80"
+                        "angle2": "80",
                     },
                     {
                         "py/object": "entity.angle.Angle",
@@ -147,11 +147,11 @@
                         "organ3": "13",
                         "organ4": "15",
                         "angle1": "30",
-                        "angle2": "90"
-                    }
-                ]
+                        "angle2": "90",
+                    },
+                ],
             },
-            "keys": "d+k"
+            "keys": "d+k",
         },
         {
             "py/object": "entity.action.Action",
@@ -166,19 +166,19 @@
                         "description": "",
                         "judge_point": "16",
                         "standard": "28",
-                        "located": "上"
+                        "located": "上",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "16",
                         "standard": "26",
-                        "located": "下"
-                    }
+                        "located": "下",
+                    },
                 ],
-                "angles": []
+                "angles": [],
             },
-            "keys": "d+l"
+            "keys": "d+l",
         },
         {
             "py/object": "entity.action.Action",
@@ -193,19 +193,19 @@
                         "description": "",
                         "judge_point": "15",
                         "standard": "27",
-                        "located": "上"
+                        "located": "上",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "15",
                         "standard": "25",
-                        "located": "下"
-                    }
+                        "located": "下",
+                    },
                 ],
-                "angles": []
+                "angles": [],
             },
-            "keys": "a+l"
+            "keys": "a+l",
         },
         {
             "py/object": "entity.action.Action",
@@ -220,7 +220,7 @@
                         "description": "",
                         "judge_point": "15",
                         "standard": "11",
-                        "located": "上"
+                        "located": "上",
                     }
                 ],
                 "angles": [
@@ -232,11 +232,11 @@
                         "organ3": "13",
                         "organ4": "11",
                         "angle1": "20",
-                        "angle2": "90"
+                        "angle2": "90",
                     }
-                ]
+                ],
             },
-            "keys": "d"
+            "keys": "d",
         },
         {
             "py/object": "entity.action.Action",
@@ -251,19 +251,19 @@
                         "description": "",
                         "judge_point": "16",
                         "standard": "15",
-                        "located": "右"
+                        "located": "右",
                     },
                     {
                         "py/object": "entity.position.Position",
                         "description": "",
                         "judge_point": "16|15",
                         "standard": "0",
-                        "located": "上"
-                    }
+                        "located": "上",
+                    },
                 ],
-                "angles": []
+                "angles": [],
             },
-            "keys": "u"
+            "keys": "u",
         },
         {
             "py/object": "entity.action.Action",
@@ -282,7 +282,7 @@
                         "organ3": "11",
                         "organ4": "12",
                         "angle1": "0",
-                        "angle2": "50"
+                        "angle2": "50",
                     },
                     {
                         "py/object": "entity.angle.Angle",
@@ -292,11 +292,11 @@
                         "organ3": "14",
                         "organ4": "16",
                         "angle1": "150",
-                        "angle2": "180"
-                    }
-                ]
+                        "angle2": "180",
+                    },
+                ],
             },
-            "keys": "d+j"
+            "keys": "d+j",
         },
         {
             "py/object": "entity.action.Action",
@@ -315,7 +315,7 @@
                         "organ3": "12",
                         "organ4": "11",
                         "angle1": "0",
-                        "angle2": "50"
+                        "angle2": "50",
                     },
                     {
                         "py/object": "entity.angle.Angle",
@@ -325,11 +325,11 @@
                         "organ3": "13",
                         "organ4": "15",
                         "angle1": "150",
-                        "angle2": "180"
-                    }
-                ]
+                        "angle2": "180",
+                    },
+                ],
             },
-            "keys": "a+j"
+            "keys": "a+j",
         },
         {
             "py/object": "entity.action.Action",
@@ -344,7 +344,7 @@
                         "description": "",
                         "judge_point": "15",
                         "standard": "0",
-                        "located": "上"
+                        "located": "上",
                     }
                 ],
                 "angles": [
@@ -356,11 +356,11 @@
                         "organ3": "11",
                         "organ4": "15",
                         "angle1": "120",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "o"
+            "keys": "o",
         },
         {
             "py/object": "entity.action.Action",
@@ -375,7 +375,7 @@
                         "description": "",
                         "judge_point": "16",
                         "standard": "0",
-                        "located": "上"
+                        "located": "上",
                     }
                 ],
                 "angles": [
@@ -387,11 +387,11 @@
                         "organ3": "12",
                         "organ4": "24",
                         "angle1": "120",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "o"
+            "keys": "o",
         },
         {
             "py/object": "entity.action.Action",
@@ -410,11 +410,11 @@
                         "organ3": "24",
                         "organ4": "26",
                         "angle1": "120",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "k"
+            "keys": "k",
         },
         {
             "py/object": "entity.action.Action",
@@ -433,11 +433,11 @@
                         "organ3": "23",
                         "organ4": "25",
                         "angle1": "120",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "k"
+            "keys": "k",
         },
         {
             "py/object": "entity.action.Action",
@@ -452,7 +452,7 @@
                         "description": "",
                         "judge_point": "16",
                         "standard": "12",
-                        "located": "上"
+                        "located": "上",
                     }
                 ],
                 "angles": [
@@ -464,11 +464,11 @@
                         "organ3": "14",
                         "organ4": "16",
                         "angle1": "30",
-                        "angle2": "90"
+                        "angle2": "90",
                     }
-                ]
+                ],
             },
-            "keys": "a"
+            "keys": "a",
         },
         {
             "py/object": "entity.action.Action",
@@ -487,11 +487,11 @@
                         "organ3": "12",
                         "organ4": "16",
                         "angle1": "150",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "j"
+            "keys": "j",
         },
         {
             "py/object": "entity.action.Action",
@@ -510,11 +510,11 @@
                         "organ3": "11",
                         "organ4": "15",
                         "angle1": "155",
-                        "angle2": "180"
+                        "angle2": "180",
                     }
-                ]
+                ],
             },
-            "keys": "j"
-        }
-    ]
+            "keys": "j",
+        },
+    ],
 }

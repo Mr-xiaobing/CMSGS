@@ -27,9 +27,12 @@ def getAngle(x1, y1, x2, y2, x3, y3, x4, y4):
     angle2 = int(angle2 * 180 / math.pi)
     # print(angle2)
 
-    included_angle = abs(angle1 - angle2) if (angle1 * angle2 >= 0) else (abs(angle1) + abs(angle2))
+    included_angle = (
+        abs(angle1 - angle2) if (angle1 * angle2 >= 0) else (abs(angle1) + abs(angle2))
+    )
 
-    if included_angle > 180: included_angle = 360 - included_angle
+    if included_angle > 180:
+        included_angle = 360 - included_angle
     return included_angle
 
 
@@ -37,8 +40,13 @@ class PlayShootingGameService:
     def __init__(self):
         self.mpHands = mp.solutions.hands
         self.draw = mp.solutions.drawing_utils
-        self.hands = self.mpHands.Hands(static_image_mode=False, max_num_hands=2, model_complexity=1,
-                                        min_detection_confidence=0.5, min_tracking_confidence=0.5)
+        self.hands = self.mpHands.Hands(
+            static_image_mode=False,
+            max_num_hands=2,
+            model_complexity=1,
+            min_detection_confidence=0.5,
+            min_tracking_confidence=0.5,
+        )
         self.isShooting = True
         # app = QApplication(sys.argv)
         # desktop = QGuiApplication.primaryScreen().availableGeometry()
@@ -56,7 +64,9 @@ class PlayShootingGameService:
             if results.multi_hand_landmarks:
                 for handLms in results.multi_hand_landmarks:
                     # 这个还需要乘以对应的宽高
-                    self.draw.draw_landmarks(image, handLms, self.mpHands.HAND_CONNECTIONS)
+                    self.draw.draw_landmarks(
+                        image, handLms, self.mpHands.HAND_CONNECTIONS
+                    )
             return {"hands": results, "image": image}
 
     # 判断是否符合点击条件 还是用角度来判断
@@ -68,7 +78,8 @@ class PlayShootingGameService:
         x3 = position_list["left_position"][2][1]
         y3 = position_list["left_position"][2][2]
         angle = getAngle(x2, y2, x1, y1, x2, y2, x3, y3)
-        if 150 < angle < 180: self.isShooting = True
+        if 150 < angle < 180:
+            self.isShooting = True
 
         if 0 < angle < 150 and self.isShooting:
             pyautogui.click()
@@ -93,7 +104,8 @@ class PlayShootingGameService:
                     else:
                         right_list.append([id, cx, cy, mx, my])
 
-                    if draw: cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+                    if draw:
+                        cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
                 index += 1
         return {"left_position": left_list, "right_position": right_list}
 
@@ -109,7 +121,10 @@ class PlayShootingGameService:
             result_hands = read_result["hands"]
             position_list = self.findPosition(result_hands, result_image)
             if len(position_list["left_position"]) > 8:
-                pyautogui.moveTo(position_list["left_position"][8][3], position_list["left_position"][8][4])
+                pyautogui.moveTo(
+                    position_list["left_position"][8][3],
+                    position_list["left_position"][8][4],
+                )
                 self.shooting(position_list)
             cTime = time.time()
             fps = 1 / (cTime - pTime)
@@ -117,11 +132,20 @@ class PlayShootingGameService:
             result_image = cv2.cvtColor(result_image, cv2.COLOR_RGB2BGR)
             result_image = cv2.resize(result_image, (self.width, self.height))
             result_image = result_image.copy()
-            cv2.putText(result_image, 'fps:' + str(int(fps)), (100, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 255), 3)
+            cv2.putText(
+                result_image,
+                "fps:" + str(int(fps)),
+                (100, 70),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                3,
+                (255, 0, 255),
+                3,
+            )
             cv2.imshow("action", result_image)
-            if cv2.waitKey(1) & 0xFF == ord('q'): break
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test = PlayShootingGameService()
     test.play()

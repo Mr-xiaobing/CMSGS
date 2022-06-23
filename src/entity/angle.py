@@ -1,5 +1,14 @@
 class Angle:
-    def __init__(self, description: str, organ1: str, organ2: str, organ3: str, organ4: str, angle1: str, angle2: str):
+    def __init__(
+        self,
+        description: str,
+        organ1: str,
+        organ2: str,
+        organ3: str,
+        organ4: str,
+        angle1: str,
+        angle2: str,
+    ):
         self.description = description
         # 1 2 两个点组成一个直线
         self.organ1 = organ1

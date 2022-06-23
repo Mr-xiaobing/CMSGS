@@ -11,7 +11,6 @@ from service.PlayShootingGameService import PlayShootingGameService
 
 
 class LocalActionLibraryUi(QDialog):
-
     def __init__(self):
         super().__init__()
         self.back_home_button = None
@@ -26,17 +25,17 @@ class LocalActionLibraryUi(QDialog):
     def action_ui(self, actions, game, index, index_y):
         action_ui = QWidget(actions)
         action_ui.resize(200, 300)
-        action_ui.move((200*index)+(15*index), 320*index_y)
+        action_ui.move((200 * index) + (15 * index), 320 * index_y)
         game_name = QLabel(action_ui)
-        game_name.setText("游戏名称："+game.name)
-        object_name = "game"+str(index)
+        game_name.setText("游戏名称：" + game.name)
+        object_name = "game" + str(index)
         action_ui.setObjectName(object_name)
-        action_ui.setStyleSheet("#"+object_name+"{border:1px solid}")
+        action_ui.setStyleSheet("#" + object_name + "{border:1px solid}")
         game_name.move(10, 20)
 
         description_label = QLabel(action_ui)
         description_label.setMaximumSize(200, 170)
-        description_label.setText("介绍：\n"+game.description)
+        description_label.setText("介绍：\n" + game.description)
         description_label.move(10, 50)
         description_label.setWordWrap(True)
 
@@ -123,9 +122,9 @@ class LocalActionLibraryUi(QDialog):
         index_y = -1
         for game_str in files:
             if index % 6 == 0:
-                index_y = index_y+1
+                index_y = index_y + 1
                 index = 0
-            with open(prefix_url+game_str, encoding="utf-8") as game_file:
+            with open(prefix_url + game_str, encoding="utf-8") as game_file:
                 # dict_game =
                 s = game_file.read()
                 game = jsonpickle.decode(s)
