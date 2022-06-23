@@ -112,14 +112,13 @@ class AddGameUi(QDialog):
         # 动作部分
 
     def save_game(self):
-        out_file = open("./data/"+self.game.name+".json", "w", encoding="utf-8")
-        s = json.dumps(json.loads(jsonpickle.encode(self.game)), indent=4, ensure_ascii=False)
-        out_file.write(s)
-        # json.dump(self.game, out_file, default=lambda o: o.__dict__, ensure_ascii=False)
-        # print(type(my_game))
-        # d = json.loads(my_game)
-        # new_game1 = DefaultMunch.fromDict(d)
-        out_file.close()
+        with open("./data/"+self.game.name+".json", "w", encoding="utf-8") as out_file:
+            s = json.dumps(json.loads(jsonpickle.encode(self.game)), indent=4, ensure_ascii=False)
+            out_file.write(s)
+            # json.dump(self.game, out_file, default=lambda o: o.__dict__, ensure_ascii=False)
+            # print(type(my_game))
+            # d = json.loads(my_game)
+            # new_game1 = DefaultMunch.fromDict(d)
         self.close()
 
     def center(self):

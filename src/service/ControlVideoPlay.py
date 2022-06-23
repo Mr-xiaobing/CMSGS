@@ -26,12 +26,10 @@ def getAngle(x1, y1, x2, y2, x3, y3, x4, y4):
     angle2 = math.atan2(dy2, dx2)
     angle2 = int(angle2 * 180 / math.pi)
     # print(angle2)
-    if angle1 * angle2 >= 0:
-        included_angle = abs(angle1 - angle2)
-    else:
-        included_angle = abs(angle1) + abs(angle2)
-    if included_angle > 180:
-        included_angle = 360 - included_angle
+
+    included_angle = abs(angle1 - angle2) if angle1 * angle2 >= 0 else (abs(angle1) + abs(angle2))
+
+    if included_angle > 180: included_angle = 360 - included_angle
     return included_angle
 
 

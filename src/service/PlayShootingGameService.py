@@ -9,7 +9,6 @@ import pyautogui
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QGuiApplication
 
-
 # 读取对应的图片，返回对应数组 （只有动作数组 和 图片）
 from service.PlayService import get_angle
 
@@ -27,12 +26,10 @@ def getAngle(x1, y1, x2, y2, x3, y3, x4, y4):
     angle2 = math.atan2(dy2, dx2)
     angle2 = int(angle2 * 180 / math.pi)
     # print(angle2)
-    if angle1 * angle2 >= 0:
-        included_angle = abs(angle1 - angle2)
-    else:
-        included_angle = abs(angle1) + abs(angle2)
-    if included_angle > 180:
-        included_angle = 360 - included_angle
+
+    included_angle = abs(angle1 - angle2) if (angle1 * angle2 >= 0) else (abs(angle1) + abs(angle2))
+
+    if included_angle > 180: included_angle = 360 - included_angle
     return included_angle
 
 
@@ -71,12 +68,11 @@ class PlayShootingGameService:
         x3 = position_list["left_position"][2][1]
         y3 = position_list["left_position"][2][2]
         angle = getAngle(x2, y2, x1, y1, x2, y2, x3, y3)
-        if 150 < angle < 180:
-            self.isShooting = True
-        if 0 < angle < 150:
-            if self.isShooting:
-                pyautogui.click()
-                self.isShooting = False
+        if 150 < angle < 180: self.isShooting = True
+
+        if 0 < angle < 150 and self.isShooting:
+            pyautogui.click()
+            self.isShooting = False
 
     def findPosition(self, results, img, draw=True):
         left_list = []
@@ -91,13 +87,11 @@ class PlayShootingGameService:
                     cx, cy = int(lm.x * w), int(lm.y * h)
                     # 具体鼠标移动到的位置
                     mx, my = int(lm.x * self.width), int(lm.y * self.height)
-                    if index == 0:
-                        left_list.append([id, cx, cy, mx, my])
-                    else:
-                        right_list.append([id, cx, cy, mx, my])
-                    if draw:
-                        cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
-                index = index + 1
+
+                    left_list.append([id, cx, cy, mx, my]) if index == 0 else right_list.append([id, cx, cy, mx, my])
+
+                    if draw: cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+                index += 1
         return {"left_position": left_list, "right_position": right_list}
 
     def play(self):
@@ -112,7 +106,6 @@ class PlayShootingGameService:
             result_hands = read_result["hands"]
             position_list = self.findPosition(result_hands, result_image)
             if len(position_list["left_position"]) > 8:
-                print(1)
                 pyautogui.moveTo(position_list["left_position"][8][3], position_list["left_position"][8][4])
                 self.shooting(position_list)
             cTime = time.time()
@@ -123,9 +116,7 @@ class PlayShootingGameService:
             result_image = result_image.copy()
             cv2.putText(result_image, 'fps:' + str(int(fps)), (100, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 255), 3)
             cv2.imshow("action", result_image)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
+            if cv2.waitKey(1) & 0xFF == ord('q'): break
 
 
 if __name__ == '__main__':

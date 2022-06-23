@@ -10,28 +10,25 @@ import pyautogui
 
 # 判断动作角度是否符合要求
 
-def judgeAngles(angle, result_post):
+def judgeAngles(angle, result_post) -> bool:
     post1 = result_post.landmark[int(angle.organ1)]
     post2 = result_post.landmark[int(angle.organ2)]
     post3 = result_post.landmark[int(angle.organ3)]
     post4 = result_post.landmark[int(angle.organ4)]
+
     min_angle = int(angle.angle1)
     max_angle = int(angle.angle2)
+
     result_angle = get_angle(post1, post2, post3, post4)
     # print("角度:")
     # print("最小:"+str(min_angle))
     # print("最大:" + str(max_angle))
     # print(result_angle)
-    if min_angle <= result_angle <= max_angle:
-        return True
-    else:
-        return False
-
-
+    return True if (min_angle <= result_angle <= max_angle) else False
 
 
 # 判断动作关键位置是否符合要求
-def judgePosition(position, result_post):
+def judgePosition(position, result_post) -> bool:
     standard_post = result_post.landmark[int(position.standard)]
     if standard_post.visibility <= 0.1:
         return False
@@ -82,12 +79,10 @@ def get_angle(angle1, angle2, angle3, angle4):
     angle2 = math.atan2(dy2, dx2)
     angle2 = int(angle2 * 180 / math.pi)
     # print(angle2)
-    if angle1 * angle2 >= 0:
-        included_angle = abs(angle1 - angle2)
-    else:
-        included_angle = abs(angle1) + abs(angle2)
-    if included_angle > 180:
-        included_angle = 360 - included_angle
+
+    included_angle = abs(angle1 - angle2) if (angle1 * angle2 >= 0) else (abs(angle1) + abs(angle2))
+
+    if included_angle > 180: included_angle = 360 - included_angle
     return included_angle
 
 
@@ -96,6 +91,7 @@ result_post = None
 game = None
 input_lock = False
 close = False
+
 
 class PlayService:
     def __init__(self):
@@ -111,7 +107,8 @@ class PlayService:
         self.judge_action = False
         self.actions = None
 
-    def inputKey(self):
+    @staticmethod
+    def inputKey() -> None:
         global input_lock
         while True:
             if close:
@@ -149,7 +146,7 @@ class PlayService:
         return
         # 最核心的方法，用于读取动作检测动作是否符合要求，并执行对应的操作
 
-    def playGame(self, new_game):
+    def playGame(self, new_game) -> None:
         cap = cv2.VideoCapture(0)
         play = PlayService()
         pTime = 0
@@ -178,11 +175,11 @@ class PlayService:
                 break
 
     # 读取对应的图片，返回对应数组 （只有动作数组 和 图片）
-    def readImage(self, ret, frame):
+    def readImage(self, ret, frame) -> dict | None:
         if ret:
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
-            start = time.time()
+
             results = self.pose.process(image)
 
             # image.flags.writeable = True
@@ -200,7 +197,7 @@ class PlayService:
 # 位置：可以让多个点再某个点的相对位置（上下左右）。
 # 与，或，非三种进行连接。理论上我就可以实现对绝大部分的动作进行检测设置。
 if __name__ == '__main__':
-    print(1)
+    pass
     # 步骤一读取摄像头
     # cap = cv2.VideoCapture(0)
     # play = PlayService()
