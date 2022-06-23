@@ -5,7 +5,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import pyautogui
-from typing import Callable
+from typing import Callable, NamedTuple
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QGuiApplication
 
@@ -59,9 +59,9 @@ class ControlVideoPlay:
         :return:
         """
         if ret:
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # TODO type hint
             image.flags.writeable = False
-            results = self.hands.process(image)
+            results: NamedTuple = self.hands.process(image)
             # image.flags.writeable = True
             if results.multi_hand_landmarks:
                 for handLms in results.multi_hand_landmarks:
