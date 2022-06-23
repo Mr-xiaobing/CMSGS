@@ -8,10 +8,14 @@ import numpy as np
 import pyautogui
 
 
-# 判断动作角度是否符合要求
-
-
 def judgeAngles(angle, result_post) -> bool:
+    """
+    判断动作角度是否符合要求
+
+    :param angle:
+    :param result_post:
+    :return:
+    """
     post1 = result_post.landmark[int(angle.organ1)]
     post2 = result_post.landmark[int(angle.organ2)]
     post3 = result_post.landmark[int(angle.organ3)]
@@ -28,8 +32,14 @@ def judgeAngles(angle, result_post) -> bool:
     return True if (min_angle <= result_angle <= max_angle) else False
 
 
-# 判断动作关键位置是否符合要求
 def judgePosition(position, result_post) -> bool:
+    """
+    判断动作关键位置是否符合要求
+
+    :param position:
+    :param result_post:
+    :return:
+    """
     standard_post = result_post.landmark[int(position.standard)]
     if standard_post.visibility <= 0.1:
         return False
@@ -64,8 +74,16 @@ def judgePosition(position, result_post) -> bool:
     return True
 
 
-# 计算连个向量直接的夹角
 def get_angle(angle1, angle2, angle3, angle4):
+    """
+    计算连个向量直接的夹角
+
+    :param angle1:
+    :param angle2:
+    :param angle3:
+    :param angle4:
+    :return:
+    """
     if (
         angle1.visibility <= 0.1
         or angle2.visibility <= 0.1
@@ -154,7 +172,7 @@ class PlayService:
                 time.sleep(0.1)
 
     def readGame(self):
-        return
+        return None
         # 最核心的方法，用于读取动作检测动作是否符合要求，并执行对应的操作
 
     def playGame(self, new_game) -> None:
@@ -193,8 +211,14 @@ class PlayService:
                 close = True
                 break
 
-    # 读取对应的图片，返回对应数组 （只有动作数组 和 图片）
     def readImage(self, ret, frame) -> dict | None:
+        """
+        读取对应的图片，返回对应数组 （只有动作数组 和 图片）
+
+        :param ret:
+        :param frame:
+        :return:
+        """
         if ret:
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
@@ -210,6 +234,7 @@ class PlayService:
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             image = np.fliplr(image)
             return {"pose": results.pose_landmarks, "image": image}
+        return None
 
 
 # 新的方案，让用户进行关键点的设置。

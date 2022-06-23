@@ -55,7 +55,7 @@ class PlayShootingGameService:
         # # 屏幕宽
         self.width = 3840
 
-    def readImage(self, ret, frame):
+    def readImage(self, ret, frame) -> dict | None:
         if ret:
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
@@ -68,9 +68,10 @@ class PlayShootingGameService:
                         image, handLms, self.mpHands.HAND_CONNECTIONS
                     )
             return {"hands": results, "image": image}
+        return None
 
-    # 判断是否符合点击条件 还是用角度来判断
     def shooting(self, position_list):
+        # 判断是否符合点击条件 还是用角度来判断
         x1 = position_list["left_position"][4][1]
         y1 = position_list["left_position"][4][2]
         x2 = position_list["left_position"][3][1]

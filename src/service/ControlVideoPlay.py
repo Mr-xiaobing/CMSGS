@@ -50,8 +50,14 @@ class ControlVideoPlay:
         self.isControl = True
         self.count = 50
 
-    # 返回关键点 和 图像
-    def readImage(self, ret, frame):
+    def readImage(self, ret, frame) -> None|dict:
+        """
+        返回关键点 和 图像
+
+        :param ret:
+        :param frame:
+        :return:
+        """
         if ret:
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
@@ -64,9 +70,15 @@ class ControlVideoPlay:
                         image, handLms, self.mpHands.HAND_CONNECTIONS
                     )
             return {"hands": results, "image": image}
+        return None
 
-    # 暂停/播放
     def stopAndPalyVideo(self, position):
+        """
+        暂停/播放
+
+        :param position:
+        :return:
+        """
         if position["right_position"]:
             x1 = position["right_position"][8][1]
             y1 = position["right_position"][8][2]
@@ -133,8 +145,13 @@ class ControlVideoPlay:
                 return True
         return False
 
-    # 下一个视频
     def nextVideo(self, position):
+        """
+        下一个视频
+
+        :param position:
+        :return:
+        """
         if position["left_position"]:
             finger_pip6 = position["left_position"][6]
             finger_pip10 = position["left_position"][10]
@@ -184,8 +201,13 @@ class ControlVideoPlay:
                 return True
         return False
 
-    # 上一个视频
     def lastVideo(self, position):
+        """
+        上一个视频
+
+        :param position:
+        :return:
+        """
         if position["right_position"]:
             finger_pip6 = position["right_position"][6]
             finger_pip10 = position["right_position"][10]
@@ -232,8 +254,13 @@ class ControlVideoPlay:
                 return True
         return False
 
-    # 快进
     def speedUp(self, position):
+        """
+        快进
+
+        :param position:
+        :return:
+        """
         if position["left_position"]:
             finger_pip6 = position["left_position"][6]
             finger_pip10 = position["left_position"][10]
@@ -283,8 +310,13 @@ class ControlVideoPlay:
                 return True
         return
 
-    # 快退
-    def speedDown(self, position):
+    def speedDown(self, position) -> None | bool:
+        """
+        快退
+
+        :param position:
+        :return:
+        """
         if position["right_position"]:
             finger_pip6 = position["right_position"][6]
             finger_pip10 = position["right_position"][10]
@@ -329,10 +361,15 @@ class ControlVideoPlay:
                 pyautogui.hotkey("left")
                 time.sleep(0.7)
                 return True
-        return
+        return None
 
-    # 静音/音量
     def mute(self, position):
+        """
+        静音/音量
+
+        :param position:
+        :return:
+        """
         if position["left_position"] and position["right_position"]:
             left_index_tip = position["left_position"][8]
             left_index_mcp = position["left_position"][5]
@@ -367,8 +404,13 @@ class ControlVideoPlay:
                 return True
         return False
 
-    # 点赞
     def praise(self, position):
+        """
+        点赞
+
+        :param position:
+        :return:
+        """
         if position["right_position"]:
             right_finger_pip6 = position["right_position"][6]
             right_finger_pip10 = position["right_position"][10]
@@ -413,8 +455,13 @@ class ControlVideoPlay:
                 return True
         return
 
-    # 一键三连
-    def threeEven(self, position):
+    def threeEven(self, position) -> bool|None:
+        """
+        一键三连
+
+        :param position:
+        :return:
+        """
         if position["right_position"] and position["left_position"]:
             judge_right = False
             right_finger_pip6 = position["right_position"][6]
@@ -476,11 +523,15 @@ class ControlVideoPlay:
                     time.sleep(3)
                     pyautogui.keyUp("q")
                     return True
+        return None
 
-        return
-
-    # 全屏
     def FullScreen(self, position):
+        """
+        全屏
+
+        :param position:
+        :return:
+        """
         if position["right_position"]:
             right_thumb_cmc = position["right_position"][1]
             right_thumb_mcp = position["right_position"][2]
@@ -519,8 +570,13 @@ class ControlVideoPlay:
                 return False
         return True
 
-    # 取消控制
     def setControl(self, position) -> None:
+        """
+        取消控制
+
+        :param position:
+        :return:
+        """
         if position["left_position"] and position["right_position"]:
 
             right_thumb_tip = position["right_position"][4]
@@ -582,7 +638,7 @@ class ControlVideoPlay:
         while cap.isOpened():
             ret, frame = cap.read()
             frame = np.fliplr(frame)
-            read_result = self.readImage(ret, frame)
+            read_result: dict = self.readImage(ret, frame)
             result_image = read_result["image"]
             result_hands = read_result["hands"]
             position_list = self.findPosition(result_hands)
