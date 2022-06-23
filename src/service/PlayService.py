@@ -134,7 +134,7 @@ class PlayService:
                         input_keys = action.keys.split("+")
                         if judge_action:
                             for key in input_keys:
-                                if action.keys == "a" or action.keys == "d" or action.keys == "left" or action.keys == "right":
+                                if action.keys in ("a", "d", "left", "right"):
                                     pyautogui.keyDown(key)
                                     time.sleep(0.1)
                                     pyautogui.keyUp(key)

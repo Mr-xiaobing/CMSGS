@@ -94,13 +94,13 @@ class LocalActionLibraryUi(QDialog):
         shooting_action_button.setText("射击模式")
         shooting_action_button.move(250, 180)
         shooting_action_button.setMinimumSize(120, 50)
-        shooting_action_button.clicked.connect(lambda: self.shooting())
+        shooting_action_button.clicked.connect(self.shooting)
 
         control_video_button = QPushButton(self)
         control_video_button.setText("观影模式")
         control_video_button.move(380, 180)
         control_video_button.setMinimumSize(120, 50)
-        control_video_button.clicked.connect(lambda: self.controlVideo())
+        control_video_button.clicked.connect(self.controlVideo)
 
         pk_action_button = QPushButton(self)
         pk_action_button.setText("其他")

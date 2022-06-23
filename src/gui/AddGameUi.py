@@ -102,13 +102,13 @@ class AddGameUi(QDialog):
         self.save_button.setText("完成")
         self.save_button.resize(100, 60)
         self.save_button.move(600, 30)
-        self.save_button.clicked.connect(lambda: self.save_game())
+        self.save_button.clicked.connect(self.save_game)
 
         self.back_button = QPushButton(self)
         self.back_button.setText("返回")
         self.back_button.resize(100, 60)
         self.back_button.move(750, 30)
-        self.back_button.clicked.connect(lambda: self.close())
+        self.back_button.clicked.connect(self.close)
         # 动作部分
 
     def save_game(self):

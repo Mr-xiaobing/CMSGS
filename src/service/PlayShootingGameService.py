@@ -88,7 +88,10 @@ class PlayShootingGameService:
                     # 具体鼠标移动到的位置
                     mx, my = int(lm.x * self.width), int(lm.y * self.height)
 
-                    left_list.append([id, cx, cy, mx, my]) if index == 0 else right_list.append([id, cx, cy, mx, my])
+                    if index == 0:
+                        left_list.append([id, cx, cy, mx, my])
+                    else:
+                        right_list.append([id, cx, cy, mx, my])
 
                     if draw: cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
                 index += 1
