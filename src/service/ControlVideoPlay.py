@@ -418,8 +418,6 @@ class ControlVideoPlay:
 
     # 取消控制
     def setControl(self, position):
-
-
         if position["left_position"] and position["right_position"]:
 
             right_thumb_tip = position["right_position"][4]
