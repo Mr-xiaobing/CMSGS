@@ -1,4 +1,4 @@
-pyqt
+pyqt6
 jsonpickle>=2.2.0
 mediapipe>=0.8.10
 opencv-python>=4.6.0.66
