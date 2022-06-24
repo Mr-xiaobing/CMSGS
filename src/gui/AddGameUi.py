@@ -171,10 +171,10 @@ class AddGameUi(QDialog):
         angle_index = 0
         for position in action.judge.positions:
             self.position_widget(position, lay, angle_index, action)
-            angle_index = angle_index + 1
+            angle_index += 1
         for angle in action.judge.angles:
             self.angle_widget(angle, lay, angle_index, action)
-            angle_index = angle_index + 1
+            angle_index += 1
 
     # 删除角度判定
     def delete_judge_angle(self, angle, action):

@@ -2,6 +2,7 @@ import math
 import threading
 import time
 
+from typing import Optional
 import mediapipe as mp
 import cv2
 import numpy as np
@@ -112,9 +113,8 @@ def get_angle(angle1, angle2, angle3, angle4):
         included_angle = 360 - included_angle
     return included_angle
 
-
 lock = threading.Lock()
-result_post = None
+result_post: Optional = None
 game = None
 input_lock = False
 close = False
@@ -171,7 +171,8 @@ class PlayService:
                                     pyautogui.hotkey(key)
                 time.sleep(0.1)
 
-    def readGame(self):
+    @staticmethod
+    def readGame():
         return None
         # 最核心的方法，用于读取动作检测动作是否符合要求，并执行对应的操作
 
