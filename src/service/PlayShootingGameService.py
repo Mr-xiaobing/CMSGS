@@ -55,7 +55,7 @@ class PlayShootingGameService:
         # # 屏幕宽
         self.width = 3840
 
-    def readImage(self, ret, frame) -> dict | None:
+    def readImage(self, ret, frame) -> dict :
         if ret:
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
