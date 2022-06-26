@@ -11,7 +11,6 @@ from service.PlayShootingGameService import PlayShootingGameService
 
 
 class LocalActionLibraryUi(QDialog):
-
     def __init__(self):
         super().__init__()
         self.back_home_button = None
@@ -26,17 +25,17 @@ class LocalActionLibraryUi(QDialog):
     def action_ui(self, actions, game, index, index_y):
         action_ui = QWidget(actions)
         action_ui.resize(200, 300)
-        action_ui.move((200*index)+(15*index), 320*index_y)
+        action_ui.move((200 * index) + (15 * index), 320 * index_y)
         game_name = QLabel(action_ui)
-        game_name.setText("游戏名称："+game.name)
-        object_name = "game"+str(index)
+        game_name.setText("游戏名称：" + game.name)
+        object_name = "game" + str(index)
         action_ui.setObjectName(object_name)
-        action_ui.setStyleSheet("#"+object_name+"{border:1px solid}")
+        action_ui.setStyleSheet("#" + object_name + "{border:1px solid}")
         game_name.move(10, 20)
 
         description_label = QLabel(action_ui)
         description_label.setMaximumSize(200, 170)
-        description_label.setText("介绍：\n"+game.description)
+        description_label.setText("介绍：\n" + game.description)
         description_label.move(10, 50)
         description_label.setWordWrap(True)
 
@@ -52,19 +51,23 @@ class LocalActionLibraryUi(QDialog):
         edit_button.move(0, 270)
         edit_button.clicked.connect(lambda: self.edit_game(game))
 
-    def shooting(self):
+    @staticmethod
+    def shooting():
         shootingGame = PlayShootingGameService()
         shootingGame.play()
 
-    def controlVideo(self):
+    @staticmethod
+    def controlVideo():
         control = ControlVideoPlay()
         control.play()
 
-    def edit_game(self, game):
+    @staticmethod
+    def edit_game(game):
         add_game_ui = AddGameUi(game)
         add_game_ui.show()
 
-    def play_local_game(self, game):
+    @staticmethod
+    def play_local_game(game):
         play = PlayService()
         play.playGame(game)
 
@@ -94,13 +97,13 @@ class LocalActionLibraryUi(QDialog):
         shooting_action_button.setText("射击模式")
         shooting_action_button.move(250, 180)
         shooting_action_button.setMinimumSize(120, 50)
-        shooting_action_button.clicked.connect(lambda: self.shooting())
+        shooting_action_button.clicked.connect(self.shooting)
 
         control_video_button = QPushButton(self)
         control_video_button.setText("观影模式")
         control_video_button.move(380, 180)
         control_video_button.setMinimumSize(120, 50)
-        control_video_button.clicked.connect(lambda: self.controlVideo())
+        control_video_button.clicked.connect(self.controlVideo)
 
         pk_action_button = QPushButton(self)
         pk_action_button.setText("其他")
@@ -123,11 +126,11 @@ class LocalActionLibraryUi(QDialog):
         index_y = -1
         for game_str in files:
             if index % 6 == 0:
-                index_y = index_y+1
+                index_y += 1
                 index = 0
-            with open(prefix_url+game_str, encoding="utf-8") as game_file:
+            with open(prefix_url + game_str, encoding="utf-8") as game_file:
                 # dict_game =
                 s = game_file.read()
                 game = jsonpickle.decode(s)
                 self.action_ui(actions, game, index, index_y)
-                index = index + 1
+                index += 1

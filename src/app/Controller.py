@@ -23,15 +23,17 @@ class Controller:
     def home_to_library(self):
         self.home.close()
         self.localActionLibraryUi = LocalActionLibraryUi()
-        self.localActionLibraryUi.back_home_button.clicked.connect(lambda: self.localAction_to_home())
+        self.localActionLibraryUi.back_home_button.clicked.connect(
+            self.localAction_to_home
+        )
         self.localActionLibraryUi.show()
 
     def home_to_addGame(self):
         self.home.close()
         game = Game("", "", "动作游戏", "", [])
         self.addGame = AddGameUi(game)
-        self.addGame.save_button.clicked.connect(lambda: self.addGame_to_home())
-        self.addGame.back_button.clicked.connect(lambda: self.addGame_to_home_back())
+        self.addGame.save_button.clicked.connect(self.addGame_to_home)
+        self.addGame.back_button.clicked.connect(self.addGame_to_home_back)
         self.addGame.show()
 
     def addGame_to_home_back(self):
@@ -39,9 +41,11 @@ class Controller:
         self.home.show()
 
     def setup(self):
-        self.home.action_library_button.clicked.connect(lambda: self.home_to_library())
-        self.home.add_game_button.clicked.connect(lambda: self.home_to_addGame())
-        self.addGame.save_button.clicked.connect(lambda: self.addGame_to_home())
-        self.localActionLibraryUi.back_home_button.clicked.connect(lambda: self.localAction_to_home())
-        self.addGame.back_button.clicked.connect(lambda: self.addGame_to_home_back())
+        self.home.action_library_button.clicked.connect(self.home_to_library)
+        self.home.add_game_button.clicked.connect(self.home_to_addGame)
+        self.addGame.save_button.clicked.connect(self.addGame_to_home)
+        self.localActionLibraryUi.back_home_button.clicked.connect(
+            self.localAction_to_home
+        )
+        self.addGame.back_button.clicked.connect(self.addGame_to_home_back)
         self.home.show()

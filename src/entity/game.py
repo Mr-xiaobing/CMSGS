@@ -4,7 +4,9 @@ from entity.action import Action
 
 
 class Game:
-    def __init__(self, name: str, image: str, type: str, description: str, actions: List[Action]):
+    def __init__(
+        self, name: str, image: str, type: str, description: str, actions: List[Action]
+    ):
         # Game name
         self.name = name
         # Game image
