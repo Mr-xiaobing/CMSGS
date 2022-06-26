@@ -212,7 +212,7 @@ class PlayService:
                 close = True
                 break
 
-    def readImage(self, ret, frame) -> dict | None:
+    def readImage(self, ret, frame) -> dict:
         """
         读取对应的图片，返回对应数组 （只有动作数组 和 图片）
 

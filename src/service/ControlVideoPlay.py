@@ -50,7 +50,7 @@ class ControlVideoPlay:
         self.isControl = True
         self.count = 50
 
-    def readImage(self, ret, frame) -> None | dict:
+    def readImage(self, ret, frame) -> dict:
         """
         返回关键点 和 图像
 
